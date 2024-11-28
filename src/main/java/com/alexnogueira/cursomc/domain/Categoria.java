@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Categoria implements Serializable{
 
+    private static final long serialVersionUID = 1L;
     private Integer id;
     private String nome;
 
@@ -56,7 +57,5 @@ public class Categoria implements Serializable{
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
-
-
 
 }
