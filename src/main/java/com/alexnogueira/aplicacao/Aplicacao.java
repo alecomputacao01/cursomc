@@ -1,4 +1,4 @@
-package com.alexnogueira.aplicacao;
+/* package com.alexnogueira.aplicacao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -42,3 +42,4 @@ public static void main(String[] args) {
 }
 
 }
+ */

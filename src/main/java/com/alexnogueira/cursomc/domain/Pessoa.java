@@ -1,4 +1,4 @@
-package com.alexnogueira.cursomc.domain;
+/* package com.alexnogueira.cursomc.domain;
 
 import java.io.Serializable;
 
@@ -50,4 +50,4 @@ public class Pessoa implements Serializable{
         return "Pessoa [id=" + id + ", nome=" + nome + ", email=" + email + "]";
     }
 
-}
+} */
