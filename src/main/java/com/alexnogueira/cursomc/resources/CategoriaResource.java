@@ -12,7 +12,7 @@ import com.alexnogueira.cursomc.services.CategoriaService;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @RestController
-@RequestMapping(value = "/Categorias")
+@RequestMapping(value = "/categorias")
 public class CategoriaResource {
    
   @Autowired
