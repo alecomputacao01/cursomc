@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.alexnogueira.cursomc.domain.enuns.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
@@ -33,6 +34,7 @@ public class Cliente implements Serializable{
     //Isto se refletiu no construtor(tipo.getCod) e no getTipo
     private Integer tipo;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
     
