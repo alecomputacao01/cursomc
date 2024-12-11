@@ -1,6 +1,8 @@
 package com.alexnogueira.cursomc.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -25,6 +27,8 @@ public class Cidade implements Serializable{
     @ManyToOne
     @JoinColumn(name= "estado_id")
     private Estado estado;
+
+    private Pedido pedido;
 
     public Cidade(){
 
