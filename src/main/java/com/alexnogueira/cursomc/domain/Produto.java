@@ -1,8 +1,18 @@
+/*Rules: There are some rules that each bi-directional relationship must follow:
+
+    You must use its owing side simply using the mappedBy element of the @OneToOne, @OneToMany, or @ManyToMany annotation of the inverse side of a bi-directional relationship. mappedBy element is used to designate the field or property in an entity.
+    In a one-to-one bi-directional relationship, owing side is the side that contains the corresponding foreign key.
+    In a many-to-one bi-directional relationships the many side is always the owing side of the relationship and must not define the mappedBy element.
+    In case of many-to-many bi-directional relationships either side may be the owing side.
+*/
+
 package com.alexnogueira.cursomc.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -13,6 +23,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Produto implements Serializable {
@@ -33,6 +44,9 @@ public class Produto implements Serializable {
     )
     private List<Categoria> categorias = new ArrayList<>();
 
+    @OneToMany(mappedBy = "id.produto")
+    private Set<ItemPedido> itens = new HashSet<>();
+
     public Produto() {
     }
 
@@ -42,6 +56,14 @@ public class Produto implements Serializable {
         this.preco = preco;
     }
 
+    public List<Pedido> getPedidos(){
+        List<Pedido> lista = new ArrayList<>();
+        for(ItemPedido x : itens) {
+            lista.add(x.getPedido());
+        }
+        return lista;
+    }
+    
     public Integer getId() {
         return id;
     }
@@ -73,6 +95,13 @@ public class Produto implements Serializable {
 
     public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
+    }
+    public Set<ItemPedido> getItens() {
+        return itens;
     }
 
     @Override

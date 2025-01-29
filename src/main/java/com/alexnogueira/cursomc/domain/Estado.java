@@ -1,3 +1,11 @@
+/*Rules: There are some rules that each bi-directional relationship must follow:
+
+    You must use its owing side simply using the mappedBy element of the @OneToOne, @OneToMany, or @ManyToMany annotation of the inverse side of a bi-directional relationship. mappedBy element is used to designate the field or property in an entity.
+    In a one-to-one bi-directional relationship, owing side is the side that contains the corresponding foreign key.
+    In a many-to-one bi-directional relationships the many side is always the owing side of the relationship and must not define the mappedBy element.
+    In case of many-to-many bi-directional relationships either side may be the owing side.
+*/
+
 package com.alexnogueira.cursomc.domain;
 
 import java.io.Serializable;

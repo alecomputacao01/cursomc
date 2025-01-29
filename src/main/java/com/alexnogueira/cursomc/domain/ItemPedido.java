@@ -10,65 +10,81 @@ package com.alexnogueira.cursomc.domain;
 
 import java.io.Serializable;
 
-import com.alexnogueira.cursomc.domain.enuns.EstadoPagamento;
-
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToOne;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Pagamento implements Serializable{
+public class ItemPedido implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    private Integer id;
-    private Integer estado;
+    @EmbeddedId
+    private ItemPedidoPK id = new ItemPedidoPK();
 
-    @OneToOne
-    @JoinColumn(name="pedido_id")
-    @MapsId
+    @ManyToOne
+    @MapsId("pedido")
+    @JoinColumn(name = "pedido_id")
     private Pedido pedido;
 
-        
-    public Pagamento() {
-    }
+    @ManyToOne
+    @MapsId("produto")
+    @JoinColumn(name = "produto_id")
+    private Produto produto;
 
-    public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
-        this.id = id;
-        this.estado = estado.getCod();
-        this.pedido = pedido;
+    private Double desconto;
+    private Integer quantidade;
+    private Double preco;
+    
+       
+    public ItemPedido() {
     }
-
-    public Integer getId() {
+    public ItemPedido(Pedido pedido, Produto produto, Double desconto, Integer quantidade,
+            Double preco) {
+        id.setPedido(pedido);
+        id.setProduto(produto);        
+        this.desconto = desconto;
+        this.quantidade = quantidade;
+        this.preco = preco;
+    }
+    public ItemPedidoPK getId() {
         return id;
     }
-
-    public void setId(Integer id) {
+    public void setId(ItemPedidoPK id) {
         this.id = id;
     }
-
-    public EstadoPagamento getEstado() {
-        return EstadoPagamento.toEnum(estado);
-    }
-
-    public void setEstado(EstadoPagamento estado) {
-        this.estado = estado.getCod();
-    }
-
     public Pedido getPedido() {
         return pedido;
     }
-
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
-
+    public Produto getProduto() {
+        return produto;
+    }
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+    public Double getDesconto() {
+        return desconto;
+    }
+    public void setDesconto(Double desconto) {
+        this.desconto = desconto;
+    }
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+    public Double getPreco() {
+        return preco;
+    }
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -76,7 +92,6 @@ public abstract class Pagamento implements Serializable{
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -85,7 +100,7 @@ public abstract class Pagamento implements Serializable{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Pagamento other = (Pagamento) obj;
+        ItemPedido other = (ItemPedido) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -93,7 +108,4 @@ public abstract class Pagamento implements Serializable{
             return false;
         return true;
     }
-
-    
-    
 }
