@@ -10,6 +10,8 @@ package com.alexnogueira.cursomc.domain;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -21,6 +23,7 @@ public class ItemPedido implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
+    @JsonIgnore
     @EmbeddedId
     private ItemPedidoPK id = new ItemPedidoPK();
 
@@ -55,19 +58,14 @@ public class ItemPedido implements Serializable{
     public void setId(ItemPedidoPK id) {
         this.id = id;
     }
+    @JsonIgnore
     public Pedido getPedido() {
-        return pedido;
-    }
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+        return id.getPedido();
     }
     public Produto getProduto() {
-        return produto;
+        return id.getProduto();
     }
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-    public Double getDesconto() {
+     public Double getDesconto() {
         return desconto;
     }
     public void setDesconto(Double desconto) {

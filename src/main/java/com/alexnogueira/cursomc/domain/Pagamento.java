@@ -11,6 +11,7 @@ package com.alexnogueira.cursomc.domain;
 import java.io.Serializable;
 
 import com.alexnogueira.cursomc.domain.enuns.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -30,6 +31,7 @@ public abstract class Pagamento implements Serializable{
     private Integer id;
     private Integer estado;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name="pedido_id")
     @MapsId

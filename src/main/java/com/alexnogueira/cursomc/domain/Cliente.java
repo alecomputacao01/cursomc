@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.alexnogueira.cursomc.domain.enuns.TipoCliente;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
@@ -15,7 +15,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -35,7 +34,7 @@ public class Cliente implements Serializable{
     //Isto se refletiu no construtor(tipo.getCod) e no getTipo
     private Integer tipo;
 
-    @JsonManagedReference
+   
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
     
@@ -43,6 +42,7 @@ public class Cliente implements Serializable{
     @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     //@JoinColumn(name = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
