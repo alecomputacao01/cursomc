@@ -1,0 +1,12 @@
+### Variables 
+@apiurl = http://localhost:8080
+
+POST {{apiurl}}/categorias HTTP/1.1
+content-type: application/json
+
+{
+    "nome": "Casa mesa e banho"
+}
+
+### GET users
+GET {{apiurl}}/categorias/3 HTTP/1.1
